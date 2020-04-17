@@ -1,55 +1,53 @@
 package ru.netology.stats;
 
-import com.sun.security.jgss.GSSUtil;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.common.TextParsingException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StatsServiceTest {
+    StatsService service = new StatsService();
+    long[] monthlySum = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
 
-@Test
-    void calculateSales(){
-        StatsService service = new StatsService();
+    @Test
+    void shouldGetSum() {
+        long expected = 180;
+        assertEquals(expected, service.getSum(monthlySum));
+    }
 
-        long[] monthlySum = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
+    @Test
+    void shoukdGetAverageSum() {
+        long expected = 15;
+        assertEquals(expected, service.getAverageSum(monthlySum));
+    }
 
+    @Test
+    void souldGetMaxMonthSale() {
+        long expected = 8;
+        assertEquals(expected, service.getMaxMonthSale(monthlySum));
+    }
 
+    @Test
+    void getMinMonthSale() {
+        long expected = 9;
+        assertEquals(expected, service.getMinMonthSale(monthlySum));
+    }
 
-        long[][] calculate = service.calculateSales(monthlySum);
+    @Test
+    void getMonthCountLessAverage() {
+        long expected = 5;
+        assertEquals(expected, service.getMonthCountLessAverage(monthlySum));
+    }
 
-        long expectedSum = 180;
-        assertEquals(expectedSum, calculate[0][0]);
+    @Test
+    void getMonthCountMoreAverage() {
+        long expected = 5;
+        assertEquals(expected, service.getMonthCountMoreAverage(monthlySum));
+    }
 
-
-        long expectedOverageSum = 15;
-        assertEquals(expectedOverageSum, calculate[1][0]);
-
-
-        long maxSale =8;
-        assertEquals(maxSale, calculate[2][0]);
-
-
-        long minSale = 9;
-        assertEquals(minSale, calculate[3][0]);
-
-
-   //     long[] minAverageMonthly = {1, 3, 9};
-    //    assertEquals(minAverageMonthly, sum[4]);
-
-
-
-
-    System.out.println(calculate[0][0] + " Общая сумма дохода за 12 месяцев");
-    System.out.println(calculate[1][0] +" Средний сумма дохода за 12 месяцев");
-    System.out.println(calculate[2][0] + " Месяц, в котором сумма максимальная");
-    System.out.println(calculate[3][0] + " Месяц, в котором сумма минимальна");
-    System.out.println(calculate[4][0] + " Месяц, в котором сумма продаж меньше средней");
-    System.out.println(calculate[4][1] + " Месяц, в котором сумма продаж меньше средней");
-    System.out.println(calculate[4][2] + " Месяц, в котором сумма продаж меньше средней");
-    System.out.println(calculate[4][3] + " Месяц, в котором сумма продаж меньше средней");
-
-}
-
+    @Test
+    void shouldTest() {
+        int[] expeted = {6, 8};
+        assertArrayEquals(expeted, service.getMonthWithMaxSum(monthlySum));
+    }
 }
