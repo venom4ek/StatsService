@@ -17,35 +17,39 @@ class StatsServiceTest {
 
 
 
-        long[] sum = service.calculateSales(monthlySum);
+        long[][] calculate = service.calculateSales(monthlySum);
 
         long expectedSum = 180;
-        assertEquals(expectedSum, sum[0]);
+        assertEquals(expectedSum, calculate[0][0]);
 
 
         long expectedOverageSum = 15;
-        assertEquals(expectedOverageSum, sum[1]);
+        assertEquals(expectedOverageSum, calculate[1][0]);
 
 
         long maxSale =8;
-        assertEquals(maxSale, sum[2]);
+        assertEquals(maxSale, calculate[2][0]);
 
 
         long minSale = 9;
-        assertEquals(minSale, sum[3]);
+        assertEquals(minSale, calculate[3][0]);
 
 
-        long[] minAverageMonthly = {1, 3, 9};
-        assertEquals(minAverageMonthly, sum[4]);
+   //     long[] minAverageMonthly = {1, 3, 9};
+    //    assertEquals(minAverageMonthly, sum[4]);
 
 
 
 
-    System.out.println(sum[0] + " Общая сумма дохода за 12 месяцев");
-    System.out.println(sum[1] +" Средний сумма дохода за 12 месяцев");
-    System.out.println(sum[2] + " Месяц, в котором сумма максимальная");
-    System.out.println(sum[3] + " Месяц, в котором сумма минимальна");
- //   System.out.println(sum[4]);
-    }
+    System.out.println(calculate[0][0] + " Общая сумма дохода за 12 месяцев");
+    System.out.println(calculate[1][0] +" Средний сумма дохода за 12 месяцев");
+    System.out.println(calculate[2][0] + " Месяц, в котором сумма максимальная");
+    System.out.println(calculate[3][0] + " Месяц, в котором сумма минимальна");
+    System.out.println(calculate[4][0] + " Месяц, в котором сумма продаж меньше средней");
+    System.out.println(calculate[4][1] + " Месяц, в котором сумма продаж меньше средней");
+    System.out.println(calculate[4][2] + " Месяц, в котором сумма продаж меньше средней");
+    System.out.println(calculate[4][3] + " Месяц, в котором сумма продаж меньше средней");
+
+}
 
 }

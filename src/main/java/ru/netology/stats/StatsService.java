@@ -5,7 +5,7 @@ package ru.netology.stats;
 
 public class StatsService {
 
-    public long[] calculateSales(long[] monthlySum) {
+    public long[][] calculateSales(long[] monthlySum) {
 // расчитываем общую сумму продаж
         long sum = 0;
         for (long monthSum : monthlySum) {
@@ -14,7 +14,7 @@ public class StatsService {
 
 
 //Расчитываем среднюю сумму продаж
-        long overageSum = sum / monthlySum.length;
+        long averageSum = sum / monthlySum.length;
 
 
 //Вычисляем месяц в котором была максимальная продажа
@@ -48,15 +48,56 @@ public class StatsService {
 
 
 //Вычисляем месяцы в которых сумма продаж была меньше среднего
-        long minAverageMonthlySales = monthlySum[0];
         int minAverageMonths = 0;
         for (int i = 0; i < monthlySum.length; i++) {
-            if (overageSum < monthlySum[i]) {
-                
+            if (monthlySum[i] > averageSum)
+                minAverageMonths++;
+        }
+        long result[] = new long[minAverageMonths];
+        int j = 0;
+
+        for (int i = 0; i < monthlySum.length; i++) {
+            if (monthlySum[i] < averageSum) {
+                result[j] = monthlySum[i];
+                j++;
+            }
+
+                long indices[] = result[0];
+                String minAverageMonthSale = ", ";
+                for (int g = 0; g < indices.length; g++) {
+                    minAverageMonthSale += indices[g] + ", ";
+                }
+
+                System.out.println(minAverageMonths + " месяцы с суммами меньше среднего");
+
+
+      /*          long minAverageMonthSale[] = result[];
+                String minAverageMonthSaleStr = "";
+                for (int g = 0; g < minAverageMonthSale.length; g++) {
+                    minAverageMonthSaleStr += minAverageMonthSale[g] + ", ";
+                }*/
+
+
+
+
+
+//Вычисляем месяцы в которых сумма продаж была больше среднего
+/*        int minAverageMonths = 0;
+
+        for (int i = 0; i < monthlySum.length; i++) {
+            if (monthlySum[i] < averageSum)
+                minAverageMonths++;
+        }
+        long minAverageMonthSale[] = new long[minAverageMonths];
+        int j = 0;
+        for (int i = 0; i < monthlySum.length; i++) {
+            if (monthlySum[i] < averageSum) {
+                minAverageMonthSale[j] = monthlySum[i]+1;
+                j++;
             }
         }
+*/
 
-
-            return new long[]{sum, overageSum, maxMonthSale, minMonthSale};
+        return new long[][]{{sum}, {averageSum}, {maxMonthSale}, {minMonthSale}, result};
     }
 }
